@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<title>home.html</title>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
+
+<link rel='stylesheet' href='./simple.css'>
+<link rel='stylesheet' href='./my-custom.css'>
+
+</head>
+
+<body>
+
+<h1>20633 No More Secrets? The Past, Present, and Future of Cryptography</h1>
+<p><br><strong>Course Leader: Tom Naps</strong> (thomas.naps@gmail.com)
+<br><strong>Course Assistant: Fred Cook</strong>
+<br><strong>Time and Place</strong> 7 Sessions: Tuesdays 3/31/2026 - 4/12/2026, 12:30 PM - 2:00 PM, The Commons Room at Bethlehem Lutheran Church - Minneapolis (ample parking lot available)
+<br><strong>Course Description</strong> We need to share secrets with those we trust. But how to communicate the secret if we're not face-to-face? And who should we trust? Powerful people and institutions have met their demise because of failures to communicate secrets to trusted parties. The science of cryptography is continually advancing. This leads to an unending battle between those who encrypt secret messages and those who try to intercept them and break the encryption. We will explore the history of cryptography and predict what lies ahead. Are we prepared to keep secrets in a future that includes quantum computing?</p>
+<hr />
+<h1>Week-by-week Course Plan (ambitious, subject to revisions)</h1>
+<ol>
+<li>The history of cryptography from Julius Caesar through WWII and the critical lesson learned from it: <a href="https://tnaps-math-cs.website/CryptographyCourse/Class1-Slides/">Week 1 slides</a><ul>
+<li>Answer Key to Caesar Cipher puzzles<ul>
+<li>Shift is 23, plaintext is <code>ALL GOOD THINGS MUST END</code></li>
+<li>Shift is 9, plaintext is <code>I DECIDED THAT I'D BETTER MAKE THIS PRETTY LONG.  THAT WAY, PEOPLE WILL HAVE AN EASIER TIME SOLVING IT. I HOPE I MADE IT SIMPLE ENOUGH.</code></li>
+</ul>
+</li>
+<li>Answer Key to Monoalphabetic Substitution puzzle: <ul>
+<li>Substitutions (plaintext and cipher character): <code>W --&gt; P, P --&gt; C, R --&gt; F, E --&gt; J, S --&gt; K, A --&gt; N, M --&gt; P, I --&gt; Q, H --&gt; R, O --&gt; U, C --&gt; V, D --&gt; W, T --&gt; X, U --&gt; Y, L --&gt; Z</code></li>
+<li>Resulting plaintext phrase: <code>THE SECRET WORD HIDES A SIMPLE CLUE</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>The quest for the elusive one-time pad leads cryptographers to AES as the standard for symmetric encryption and a new problem -- our being overwhelmed by the number secret keys we have to remember:  <a href="https://tnaps-math-cs.website/CryptographyCourse/Class2Cryptography/">Week 2 Slides</a>.   Links to web pages referenced in slides appear below.  </li>
+<li>Diffie and Helman make a remarkable mathematical discovery about asymmetric encryption keys.   Rivest, Shamir, and Adelman show how to implement it as practical computer algorithm.   It will be "unbrakeable" until it isn't.  <a href="./Class3Cryptography/">Week 3 slides</a></li>
+<li>Who do you trust as the keeper of your secrets and the keys that unlock them?  Cryptocurrency illustrates the need to blend cryptographic hashes with RSA to attain information integrity as well as secrecy. <a href="./Class4Cryptography/">Week 4 slides</a></li>
+<li>Finishing material from Week 4.  We'll start quantum and Shor next week.  <a href="./Class5Cryptography/">Week 5 slides</a></li>
+<li>A new model for computation based on two famous questions, one from math and one from physics: Does P = NP? Is there, in Einstein's words, "spooky action at a distance"?  Shor's Algorithm (1994) demonstrates that RSA will no longer work in the new quantum model of computation. <a href="./Class6Cryptography/">Week 6 slides</a></li>
+<li>When will we have quantum computers in practice instead of theory?  What do we do with our secrets when that happens? <a href="./Class7Cryptography/">Week 7 slides</a></li>
+</ol>
+<hr />
+<h1>Go deeper with your exploration of the web resources we've used in class</h1>
+<h6>Those highlighted as Excel-specific are downloadable Excel spreadsheets that you access by the link provided.   After clicking on it, you will need to save a copy to your personal storage and work with it using Excel on your own computer.  If you don't have Excel, they won't run for you.</h6>
+<ul>
+<li><a href="https://youtube.com/playlist?list=PLE4czX7pTHJ7-vd8lqyWeP3LEEsfo7h46&amp;si=q-clhklqrO2R52M4">Tom's YouTube playlist for all videos we've watched</a></li>
+<li><a href="https://cryptii.com/">Cryptii.com - site to let you encrypt/derypt with many classic ciphers</a></li>
+<li><a href="https://tnaps-math-cs.website/CryptographyCourse/clock-arithmetic.html">Modular arithmetic visualized as circular clock</a></li>
+<li><a href="https://tnaps-math-cs.website/CryptographyCourse/ModularArithmeticCalculator.html">Tom's modular arithmetic calculator that he used in Week 7.</a>  Just in case you want to try some examples for tracing Shor's algorithm yourself.  A good example for you to try is to find the factors of <em>N=21</em> with initial guess <em>a=2</em> or <em>a=5</em>.  This is simple enough where you know the answers ahead of time so that you can trace your work as you go.</li>
+<li><span style="color: red;">Excel-specific:</span> <a href="https://1drv.ms/x/c/d4479489d3d75027/IQByPvKrFoI4RZKYDka59xzvAU6yOXs8l_T7GlJu1OJiCOE">Fred's "period finder" for the linear congruential method of random number generation</a></li>
+<li><span style="color: red;">Excel-specific:</span></a> <a href="https://1drv.ms/x/c/d4479489d3d75027/IQB1j-LohLOTS5gPOR3Q1RnaAbv6r6U3JnIMDKiMaPuzUAw?e=fUC8HE">A new and improved version of Fred's period finder - didn't get a chance to show this one in class</a></li>
+<li><span style="color: red;">Excel-specific:</span><a href="https://1drv.ms/x/c/d4479489d3d75027/IQAHY-pBmTpnSoLV1TxF5B-9AXoaXuKBt_s6EsQ6OO919Ug?e=vcl7eB">Tom's Modular Arithmetic calculator</a></li>
+<li>
+<p><span style="color: red;">Excel-specific:</span> <a href="https://1drv.ms/x/c/d4479489d3d75027/IQA4c29p3yP3RJAiqSXQReflAX9N_96b67yX_CRL-feYuJE?e=h04UWD">Tom's spreadsheet to explore the difference in growth rates between N<sup>2</sup> and 2<sup>N</sup></a>. In program execution times, this means "polynomial time" vs. "exponential time". </p>
+</li>
+<li>
+<p><a href="https://bitwarden.com/password-strength/">Bill's tip for testing the computational complexity to crack your password security</a></p>
+</li>
+</ul>
+<hr />
+<h1>Book List for the Cryptograpically Curious (Additional recommendations welcomed)</h1>
+<ul>
+<li>Historical<ul>
+<li><a href="https://www.goodreads.com/book/show/150727.Enigma"><em>Enigma: The Battle for the Code</em> by Hugh Sebag-Montefiore</a></li>
+<li><a href="https://www.goodreads.com/book/show/17994.The_Code_Book"><em>The Code Book: The Science of Secrecy from Ancient Egypt to Quantum Cryptography</em> by Simon Singh</a> </li>
+<li><a href="https://www.goodreads.com/book/show/32025298-the-woman-who-smashed-codes"><em>The Woman Who Smashed Codes: A True Story of Love, Spies, and the Unlikely Heroine who Outwitted America's Enemies</em> by Jason Fagone</a>.   (Thanks to John Leroy)</li>
+</ul>
+</li>
+<li>
+<p>Fiction </p>
+<ul>
+<li><a href="https://www.goodreads.com/book/show/38212118-the-quantum-spy"><em>The Quantum Spy</em> by David Ignatius</a></li>
+<li><a href="https://www.goodreads.com/book/show/816.Cryptonomicon"><em>Cryptonomicon</em> by Neal Stephenson</a></li>
+<li><a href="https://www.goodreads.com/book/show/156153.The_Gold_Bug"><em>The Gold Bug</em> by Edgar Allan Poe</a> <ul>
+<li>William F. Friedman, an American cryptologist who helped break Japan’s PURPLE cipher in World War II, <a href="https://steemit.com/crypto/@dailydogger/edgar-allan-poe-s-influence-on-cryptography-and-literature">traced his early fascination with cryptography to reading this as a child</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>Quantum Computing and the furure</p>
+<ul>
+<li><a href="https://www.goodreads.com/book/show/17471298-quantum-computing-since-democritus"><em>Quantum Computing since Democritus</em> by Scott Aaronson</a></li>
+<li><a href="https://www.goodreads.com/book/show/16251276-schr-dinger-s-killer-app"><em>Schrödinger's Killer App: Race to Build the World's First Quantum Computer</em> by Jonathan P. Dowling</a></li>
+</ul>
+</li>
+</ul>
+<hr>
+
+<h2>Accommodations</h2>
+<p>OLLI is committed to making our courses accessible for members, and we expect our course leaders to help us make that happen. OLLI recommends that Course leaders teaching in classrooms wear voice amplifiers, and we set up our Zoom courses so that live captioning is an option. The OLLI office may contact you to make additional accommodations on a case by case basis. If you require additional accommodations, please contact <a href="OLLI@umn.edu">OLLI@umn.edu</a> and we will do our best to support your needs. </p>
+<h2>Disability statement</h2>
+<p>The University of Minnesota is committed to providing equitable access to learning opportunities for all students. If you have, or think you have, a disability in any area such as, mental health, attention, learning, chronic health, sensory, or physical, please contact the DRC office on your campus (UM Twin Cities - 612.626.1333) to arrange a confidential discussion regarding equitable access and reasonable accommodations. Additional information is available on the DRC website: <a href="https://disability.umn.edu/">https://disability.umn.edu</a> or email <a href="drc@umn.edu">drc@umn.edu</a>.</p>
+</body>
+</html>
