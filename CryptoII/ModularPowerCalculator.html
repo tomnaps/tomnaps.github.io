@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Modular Power Calculator</title>
+<style>
+  :root {
+    --bg: #f7f6f2;
+    --card: #ffffff;
+    --text: #1f2328;
+    --muted: #5a6068;
+    --accent: #1d5c8f;
+    --accent-dark: #164a73;
+    --border: #c9ccd1;
+    --error: #a12622;
+    --ok-bg: #eef5fb;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+    font-size: 20px;
+    line-height: 1.5;
+  }
+  main {
+    max-width: 760px;
+    margin: 40px auto;
+    padding: 32px;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+  }
+  h1 { font-size: 1.6rem; margin: 0 0 4px; }
+  .formula {
+    font-size: 1.25rem;
+    color: var(--muted);
+    margin: 0 0 28px;
+  }
+  label {
+    display: block;
+    font-weight: 600;
+    margin-top: 20px;
+  }
+  .hint { font-weight: 400; color: var(--muted); font-size: 0.9rem; }
+  textarea {
+    width: 100%;
+    margin-top: 6px;
+    padding: 10px 12px;
+    font-family: ui-monospace, "Cascadia Mono", Consolas, "Courier New", monospace;
+    font-size: 1.1rem;
+    border: 2px solid var(--border);
+    border-radius: 6px;
+    resize: vertical;
+    min-height: 52px;
+    overflow-wrap: anywhere;
+  }
+  textarea:focus { outline: none; border-color: var(--accent); }
+  .buttons { margin-top: 28px; display: flex; gap: 12px; flex-wrap: wrap; }
+  button {
+    font-size: 1.1rem;
+    padding: 12px 26px;
+    border-radius: 6px;
+    border: 2px solid var(--accent);
+    cursor: pointer;
+  }
+  .primary { background: var(--accent); color: #fff; }
+  .primary:hover { background: var(--accent-dark); }
+  .secondary { background: #fff; color: var(--accent); }
+  .secondary:hover { background: var(--ok-bg); }
+  #output {
+    margin-top: 28px;
+    padding: 18px 20px;
+    border-radius: 6px;
+    background: var(--ok-bg);
+    border: 1px solid #b9d3e8;
+    display: none;
+  }
+  #output.error { background: #fbeeee; border-color: #e3b5b3; color: var(--error); }
+  #result {
+    font-family: ui-monospace, "Cascadia Mono", Consolas, "Courier New", monospace;
+    font-size: 1.3rem;
+    font-weight: 700;
+    overflow-wrap: anywhere;
+    margin: 6px 0 12px;
+  }
+  #copyBtn { font-size: 0.95rem; padding: 6px 16px; }
+  .small { font-size: 0.9rem; color: var(--muted); }
+</style>
+</head>
+<body>
+<main>
+  <h1>Tom's Modular Power Calculator</h1>
+  <p class="formula">Computes &nbsp;<strong>b<sup>x</sup> mod m</strong></p>
+
+  <label for="b">Base b</label>
+  <textarea id="b" rows="1" spellcheck="false" autocomplete="off"></textarea>
+
+  <label for="x">Exponent x <span class="hint">(0 or larger)</span></label>
+  <textarea id="x" rows="1" spellcheck="false" autocomplete="off"></textarea>
+
+  <label for="m">Modulus m <span class="hint">(1 or larger)</span></label>
+  <textarea id="m" rows="1" spellcheck="false" autocomplete="off"></textarea>
+
+  <div class="buttons">
+    <button class="primary" id="computeBtn" type="button">Compute</button>
+    <button class="secondary" id="clearBtn" type="button">Clear</button>
+  </div>
+
+  <div id="output" role="status" aria-live="polite">
+    <div id="label"></div>
+    <div id="result"></div>
+    <button class="secondary" id="copyBtn" type="button">Copy result</button>
+    <span id="copied" class="small"></span>
+  </div>
+</main>
+
+<script>
+// Raises b to the power x, modulo m, using BigInt and square-and-multiply.
+function powMod(b, x, m) {
+  if (m === 1n) return 0n;
+  let result = 1n;
+  b = ((b % m) + m) % m;          // bring base into range 0..m-1 (also handles negative b)
+  while (x > 0n) {
+    if (x & 1n) result = (result * b) % m;
+    b = (b * b) % m;
+    x >>= 1n;
+  }
+  return result;
+}
+
+// Turn what the student typed into a BigInt. Spaces, commas and line breaks are ignored
+// so long numbers can be pasted in any layout.
+function readNumber(id, name) {
+  const raw = document.getElementById(id).value.replace(/[\s,]/g, "");
+  if (raw === "") throw new Error("Please enter a value for " + name + ".");
+  if (!/^-?\d+$/.test(raw)) throw new Error(name + " must be a whole number (digits only).");
+  return BigInt(raw);
+}
+
+const out = document.getElementById("output");
+
+function show(labelText, resultText, isError) {
+  out.style.display = "block";
+  out.classList.toggle("error", isError);
+  document.getElementById("label").textContent = labelText;
+  document.getElementById("result").textContent = resultText;
+  document.getElementById("copyBtn").style.display = isError ? "none" : "inline-block";
+  document.getElementById("copied").textContent = "";
+}
+
+function compute() {
+  try {
+    const b = readNumber("b", "Base b");
+    const x = readNumber("x", "Exponent x");
+    const m = readNumber("m", "Modulus m");
+    if (x < 0n) throw new Error("Exponent x must be 0 or larger.");
+    if (m < 1n) throw new Error("Modulus m must be 1 or larger.");
+    show("Result:", powMod(b, x, m).toString(), false);
+  } catch (e) {
+    show(e.message, "", true);
+  }
+}
+
+document.getElementById("computeBtn").addEventListener("click", compute);
+
+document.getElementById("clearBtn").addEventListener("click", () => {
+  ["b", "x", "m"].forEach(id => document.getElementById(id).value = "");
+  out.style.display = "none";
+  document.getElementById("b").focus();
+});
+
+document.getElementById("copyBtn").addEventListener("click", async () => {
+  const text = document.getElementById("result").textContent;
+  try {
+    await navigator.clipboard.writeText(text);
+    document.getElementById("copied").textContent = "  Copied.";
+  } catch {
+    document.getElementById("copied").textContent = "  Could not copy; select the number and copy it by hand.";
+  }
+});
+
+// Pressing Enter in any box computes (Shift+Enter still adds a new line).
+["b", "x", "m"].forEach(id => {
+  document.getElementById(id).addEventListener("keydown", e => {
+    if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); compute(); }
+  });
+});
+</script>
+</body>
+</html>
